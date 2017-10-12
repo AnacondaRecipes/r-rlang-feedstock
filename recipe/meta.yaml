@@ -14,28 +14,42 @@ source:
     - https://cran.r-project.org/src/contrib/Archive/rlang/rlang_{{ version }}.tar.gz
   sha256: 90cfcd88cae6fff044fca64b24a8e6bdc09fc276163b518ff2d90268b0c785f9
 
+
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
 build:
+  # If this is a new build for the same version, increment the build number.
   number: 0
 
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
 
+# Suggests: knitr, rmarkdown (>= 0.2.65), testthat, covr
 requirements:
   build:
-    - {{ compiler('c') }}  # [not win]
     - r-base
-    - posix                # [win]
-    - {{native}}toolchain  # [win]
+    - {{ compiler('c') }}        # [not win]
+    - {{native}}toolchain        # [win]
 
   run:
     - r-base
-    - {{native}}gcc-libs   # [win]
+    - {{native}}gcc-libs         # [win]
 
 test:
   commands:
-    - $R -e "library('rlang')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('rlang')"           # [not win]
     - "\"%R%\" -e \"library('rlang')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
 
 about:
   home: http://rlang.tidyverse.org, https://github.com/tidyverse/rlang
@@ -48,3 +62,30 @@ extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: rlang
+# Version: 0.1.2
+# Title: Functions for Base Types and Core R and 'Tidyverse' Features
+# Description: A toolbox for working with base types, core R features like the condition system, and core 'Tidyverse' features like tidy evaluation.
+# Authors@R: c( person("Lionel", "Henry", ,"lionel@rstudio.com", c("aut", "cre")), person("Hadley", "Wickham", ,"hadley@rstudio.com", "aut"), person("RStudio", role = "cph") )
+# License: GPL-3
+# LazyData: true
+# Depends: R (>= 3.1.0)
+# Suggests: knitr, rmarkdown (>= 0.2.65), testthat, covr
+# VignetteBuilder: knitr
+# RoxygenNote: 6.0.1
+# URL: http://rlang.tidyverse.org, https://github.com/tidyverse/rlang
+# BugReports: https://github.com/tidyverse/rlang/issues
+# NeedsCompilation: yes
+# Packaged: 2017-08-09 16:20:26 UTC; lionel
+# Author: Lionel Henry [aut, cre], Hadley Wickham [aut], RStudio [cph]
+# Maintainer: Lionel Henry <lionel@rstudio.com>
+# Repository: CRAN
+# Date/Publication: 2017-08-09 20:37:03 UTC
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
