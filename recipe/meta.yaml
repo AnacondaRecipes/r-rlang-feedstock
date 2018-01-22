@@ -10,8 +10,8 @@ package:
 source:
   fn: rlang_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/rlang_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/rlang/rlang_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/rlang_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/rlang/rlang_{{ version }}.tar.gz
   sha256: 772273e4f82ec33ffd28bf87bc44abbde2a6fb4b00e5723068ec5464b556c2f4
 
 
